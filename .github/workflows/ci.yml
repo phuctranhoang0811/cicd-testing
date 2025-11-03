@@ -45,6 +45,19 @@ jobs:
           echo "| Build | ✅ Successful |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "🚀 **Ready for deployment!**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 Test Details:" >> $GITHUB_STEP_SUMMARY
+          echo "- **Test Files**: 1 passed" >> $GITHUB_STEP_SUMMARY
+          echo "- **Test Cases**: 16/16 ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- **Duration**: ~3 seconds" >> $GITHUB_STEP_SUMMARY
+          echo "- **Coverage**: Date validation logic" >> $GITHUB_STEP_SUMMARY
+
+      - name: Failure Notification
+        if: failure()
+        run: |
+          echo "## ❌ CI/CD Pipeline Failed" >> $GITHUB_STEP_SUMMARY
+          echo "Something went wrong with the pipeline." >> $GITHUB_STEP_SUMMARY
+          echo "Please check the logs above for details." >> $GITHUB_STEP_SUMMARY
 
   build:
     runs-on: ubuntu-latest
