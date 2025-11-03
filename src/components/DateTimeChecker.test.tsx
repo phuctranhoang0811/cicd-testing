@@ -71,4 +71,13 @@ describe("validateDate", () => {
   it("should return null for December 31st", () => {
     expect(validateDate("2023-12-31")).toBeNull();
   });
+
+  it("should return null for January 1st", () => {
+    expect(validateDate("2023-01-01")).toBeNull();
+  });
+
+  it("should handle edge case for February in leap year correctly", () => {
+    expect(validateDate("2020-02-29")).toBeNull(); // 2020 is leap year
+    expect(validateDate("2021-02-29")).toBe("Invalid day for the selected month."); // 2021 is not leap year
+  });
 });
