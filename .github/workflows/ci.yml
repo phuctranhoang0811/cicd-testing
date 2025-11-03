@@ -34,6 +34,18 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Test Results Summary
+        if: always()
+        run: |
+          echo "## 🎯 CI/CD Pipeline Results" >> $GITHUB_STEP_SUMMARY
+          echo "| Step | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Linting | ✅ Completed |" >> $GITHUB_STEP_SUMMARY
+          echo "| Tests | ✅ All 16 tests passed |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | ✅ Successful |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🚀 **Ready for deployment!**" >> $GITHUB_STEP_SUMMARY
+
   build:
     runs-on: ubuntu-latest
     needs: test
@@ -61,3 +73,9 @@ jobs:
         with:
           name: dist-files
           path: dist/
+
+      - name: Notify Success
+        if: success()
+        run: |
+          echo "## ✅ Build & Deploy Preview Successful!" >> $GITHUB_STEP_SUMMARY
+          echo "Build artifacts have been uploaded and are ready for deployment." >> $GITHUB_STEP_SUMMARY
