@@ -82,4 +82,20 @@ describe("validateDate", () => {
       "Invalid day for the selected month."
     ); // 2021 is not leap year
   });
+
+  // New test cases for CI/CD demo
+  it("should handle boundary year 1000 correctly", () => {
+    expect(validateDate("1000-01-01")).toBeNull();
+    expect(validateDate("999-12-31")).toBe(
+      `Year must be between 1000 and ${currentYear}.`
+    );
+  });
+
+  it("should validate all months correctly", () => {
+    expect(validateDate("2023-01-31")).toBeNull(); // January - 31 days
+    expect(validateDate("2023-04-30")).toBeNull(); // April - 30 days
+    expect(validateDate("2023-04-31")).toBe(
+      "Invalid day for the selected month."
+    );
+  });
 });
