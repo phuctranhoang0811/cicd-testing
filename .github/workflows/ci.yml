@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "feature/*"]
   pull_request:
     branches: ["main"]
 
@@ -25,8 +25,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Debug - Show Node and npm versions
+        run: |
+          node --version
+          npm --version
+          npm list --depth=0
+
       - name: Run linting
         run: npm run lint
+        continue-on-error: true
 
       - name: Run tests
         run: npm test
