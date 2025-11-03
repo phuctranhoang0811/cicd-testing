@@ -78,6 +78,8 @@ describe("validateDate", () => {
 
   it("should handle edge case for February in leap year correctly", () => {
     expect(validateDate("2020-02-29")).toBeNull(); // 2020 is leap year
-    expect(validateDate("2021-02-29")).toBe("Invalid day for the selected month."); // 2021 is not leap year
+    expect(validateDate("2021-02-29")).toBe(
+      "Invalid day for the selected month."
+    ); // 2021 is not leap year
   });
 });
